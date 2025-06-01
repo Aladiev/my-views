@@ -14,4 +14,3 @@ export class FilmImage {
   @Column()
   mimetype: string;
 }
-

@@ -1,6 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class SearchFilmsRequestDto {
-  @ApiProperty({ example: 'ача'})
+  @ApiProperty({ example: 'ача' })
   readonly title: string;
 }

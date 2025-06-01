@@ -26,12 +26,18 @@ export class Film {
   @ApiProperty({ example: 2008 })
   @Column({ type: 'smallint', name: 'year', nullable: false })
   year: number;
-  
+
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty({ example: 148 * 60 })
   @Column({ type: 'smallint', name: 'duration', nullable: false })
   duration: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 1 })
+  @Column({ type: 'int', name: 'image_id', nullable: false })
+  imageId: number;
 
   @IsNotEmpty()
   @IsString()
@@ -46,12 +52,13 @@ export class Film {
   updatedAt: Date;
 
   public static create(dto: CreateFilmRequestDto): Film {
-    const film = new Film;
+    const film = new Film();
 
     film.title = dto.title;
     film.year = dto.year;
     film.duration = dto.duration;
     film.description = dto.description;
+    film.imageId = dto.imageId;
     film.createdAt = new Date();
     film.updatedAt = new Date();
 

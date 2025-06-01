@@ -16,9 +16,11 @@ export class FilmsService {
     return this.repository.save(film);
   }
 
-  public async searchFilms(dto: SearchFilmsRequestDto): Promise<SearchFilmsResponseDto> {
+  public async searchFilms(
+    dto: SearchFilmsRequestDto,
+  ): Promise<SearchFilmsResponseDto> {
     const result = await this.repository.findByTitlePattern(dto.title);
-    
+
     return SearchFilmsResponseDto.from(result);
   }
 }

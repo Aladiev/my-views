@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Film } from '../../../domain/films/film.entity';
 import { DataSource, Like, Repository } from 'typeorm';
-import { CreateFilmRequestDto } from '../dtos/createFilm/createFilmRequest.dto';
 
 @Injectable()
 export class FilmsRepository {
@@ -17,9 +16,10 @@ export class FilmsRepository {
   }
 
   public findByTitlePattern(pattern: string): Promise<Film[]> {
-    return this.dataSource.createQueryBuilder(Film, 'film')
+    return this.dataSource
+      .createQueryBuilder(Film, 'film')
       .select()
-      .where({ title: Like(`%${pattern}%`)})
+      .where({ title: Like(`%${pattern}%`) })
       .getMany();
   }
 }
