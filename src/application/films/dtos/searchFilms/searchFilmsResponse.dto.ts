@@ -1,12 +1,7 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { Film } from '../../../../domain/films/film.entity';
 
-export class SearchFilmsItemDto extends PickType(Film, [
-  'title',
-  'year',
-  'duration',
-  'imageId',
-]) {
+export class SearchFilmsItemDto extends PickType(Film, ['title', 'year', 'duration', 'imageId']) {
   public static from(film: Film): SearchFilmsItemDto {
     const dto = new SearchFilmsItemDto();
 
@@ -26,7 +21,7 @@ export class SearchFilmsResponseDto {
   public static from(films: Film[]): SearchFilmsResponseDto {
     const dto = new SearchFilmsResponseDto();
 
-    dto.items = films.map((film) => SearchFilmsItemDto.from(film));
+    dto.items = films.map(film => SearchFilmsItemDto.from(film));
 
     return dto;
   }

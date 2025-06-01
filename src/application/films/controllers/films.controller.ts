@@ -35,9 +35,7 @@ export class FilmsController {
 
   @Post('search')
   @ApiResponse200(SearchFilmsResponseDto)
-  public searchFilms(
-    @Body() dto: SearchFilmsRequestDto,
-  ): Promise<SearchFilmsResponseDto> {
+  public searchFilms(@Body() dto: SearchFilmsRequestDto): Promise<SearchFilmsResponseDto> {
     return this.filmsService.searchFilms(dto);
   }
 
@@ -66,7 +64,7 @@ export class FilmsController {
   @Get('images/:id')
   async getImage(@Param('id') id: number, @Res() res: Response) {
     const image = await this.imageService.getImage(+id);
-    
+
     if (!image) {
       return res.status(404).send('Image not found');
     }

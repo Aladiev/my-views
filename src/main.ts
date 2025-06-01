@@ -4,9 +4,7 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const initSwagger = (app: INestApplication): void => {
-  const options = new DocumentBuilder()
-    .setTitle('My views')
-    .setDescription('My views application');
+  const options = new DocumentBuilder().setTitle('My views').setDescription('My views application');
 
   const document = SwaggerModule.createDocument(app, options.build());
   SwaggerModule.setup('api', app, document);

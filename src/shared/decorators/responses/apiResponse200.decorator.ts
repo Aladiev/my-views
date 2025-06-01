@@ -1,10 +1,4 @@
-import {
-  applyDecorators,
-  HttpCode,
-  HttpStatus,
-  Type,
-  UseInterceptors,
-} from '@nestjs/common';
+import { applyDecorators, HttpCode, HttpStatus, Type, UseInterceptors } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
 export const ApiResponse200 = <T extends Type<unknown>>(
