@@ -18,16 +18,14 @@
     "docker:up": "docker compose -p my-views-stack -f docker/docker-compose.yml up -d",
     "docker:down": "docker compose -p my-views-stack -f docker/docker-compose.yml down -d",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
     "typeorm:cli": "typeorm -d migrations/config/config",
     "typeorm:cli_build": "yarn build:migration && typeorm -d dist_migrations/config/config",
     "migrate:create": "typeorm migration:create",
     "migrate:generate": "npm run typeorm:cli -- migration:generate -n ",
     "migrate:up": "yarn typeorm:cli_build -- migration:run -t each && rd /s /q dist_migrations",
     "migrate:down": "npm run typeorm:cli_build -- migration:revert -t each && rd /s /q dist_migrations",
-    "test:watch": "jest --watch",
+    "test": "jest --no-cache",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
