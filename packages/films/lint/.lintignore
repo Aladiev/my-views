@@ -1,0 +1,10 @@
+node_modules/
+dist/
+/**/*Builder.ts
+/**/*.builder.ts
+src/config.ts
+src/shared/constants/
+
+migrations/
+dist_migrations/
+coverage/

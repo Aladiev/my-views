@@ -17,10 +17,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
 
-  films:
-    image: aladiev/films
-    restart: always
-    ports:
-      - 3001:3000
-    environment:
-      - PG_CONNECTION_STRING=postgresql://postgres:postgres@db:5432/postgres
+  # films:
+  #   image: aladiev/films
+  #   restart: always
+  #   ports:
+  #     - 3001:3000
+  #   environment:
+  #     - PG_CONNECTION_STRING=postgresql://postgres:postgres@db:5432/postgres
+  #   depends_on:
+  #     - db
