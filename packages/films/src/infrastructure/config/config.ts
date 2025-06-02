@@ -2,9 +2,9 @@ import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
 
-function requiredEnv(env: string): string {
+export function requiredEnv(env: string): string {
   if (process.env[env] === undefined) throw Error(`Required environment ${env} is not provided`);
-
+  
   return process.env[env];
 }
 

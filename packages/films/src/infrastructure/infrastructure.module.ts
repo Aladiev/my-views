@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config/config';
 import { Film } from '../domain/films/film.entity';
 import { FilmImage } from '../domain/images/image.entity';
+import { DataSource } from 'typeorm';
 // import { TransactionsModule } from './transactions/transactions.module';
 
 @Global()

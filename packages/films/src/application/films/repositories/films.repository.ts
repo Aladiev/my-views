@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Film } from '../../../domain/films/film.entity';
 import { DataSource, Like, Repository } from 'typeorm';
@@ -8,7 +8,7 @@ export class FilmsRepository {
   constructor(
     @InjectRepository(Film)
     private readonly repository: Repository<Film>,
-    private readonly dataSource: DataSource,
+    @Inject(DataSource) private readonly dataSource: DataSource,
   ) {}
 
   public save(film: Film): Promise<Film> {
