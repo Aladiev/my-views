@@ -1,12 +1,32 @@
 {
-  "name": "root",
+  "name": "films",
   "version": "1.0.0",
   "private": true,
-  "description": "root workspace",
-  "license": "ISC",
-  "workspaces": [
-    "packages/*"
-  ],
+  "scripts": {
+    "build": "nest build",
+    "deploy": "yarn docker:build && yarn docker:push",
+    "build:migration": "npx tsc --project tsconfig.build-migrations.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "docker:build": "docker build . -t aladiev/films",
+    "docker:push": "docker push aladiev/films",
+    "lint": "yarn run lint:eslint && yarn run lint:prettier",
+    "lint:prettier": "prettier --config ./lint/.prettierrc --ignore-path ./lint/.lintignore --check \"./**/*.{ts,js,json,yaml,yml,md}\"",
+    "lint:eslint": "eslint -c ./lint/.eslintrc.js --ignore-path ./lint/.lintignore --max-warnings 0 --ext .ts,.js .",
+    "lint:fix": "yarn run lint:eslint:fix && yarn run lint:prettier:fix",
+    "lint:prettier:fix": "prettier --config ./lint/.prettierrc --ignore-path ./lint/.lintignore --write \"./**/*.{ts,js,json,yaml,yml,md}\"",
+    "lint:eslint:fix": "eslint -c ./lint/.eslintrc.js --ignore-path ./lint/.lintignore --fix --ext .ts,.js .",
+    "typeorm:cli": "typeorm -d migrations/config/config",
+    "typeorm:cli_build": "yarn build:migration && typeorm -d dist_migrations/config/config",
+    "migrate:create": "typeorm migration:create",
+    "migrate:generate": "npm run typeorm:cli -- migration:generate -n ",
+    "migrate:up": "yarn build:migration && yarn typeorm:cli_build -- migration:run -t each && rd /s /q dist_migrations",
+    "migrate:down": "yarn build:migration && yarn typeorm:cli_build -- migration:revert -t each && rd /s /q dist_migrations",
+    "test:unit": "jest --no-cache --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.2",
@@ -24,15 +44,15 @@
   },
   "devDependencies": {
     "@byndyusoft/sonar-coverage-reporter": "^1.0.0",
-    "@suites/di.nestjs": "^3.0.1",
-    "@suites/doubles.jest": "^3.0.1",
-    "@suites/unit": "^3.0.1",
     "@faker-js/faker": "^9.8.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
+    "@suites/di.nestjs": "^3.0.1",
+    "@suites/doubles.jest": "^3.0.1",
+    "@suites/unit": "^3.0.1",
     "@types/express": "^4.17.17",
-    "@types/jest": "^29.5.2",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.3.1",
     "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -44,29 +64,44 @@
     "prettier": "^3.0.0",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.3",
-    "ts-jest": "^29.1.0",
+    "ts-jest": "^29.3.4",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },
-  "scripts": {
-    "build": "yarn workspaces foreach --topological-dev --parallel --exclude root run build",
-    "build:src": "yarn workspaces foreach --topological-dev --parallel --exclude root run build:src",
-    "lint": "yarn run lint:eslint && yarn run lint:markdown && yarn run lint:prettier",
-    "lint:eslint": "eslint --ignore-path ./.gitignore --max-warnings 0 --ext .ts,.js .",
-    "lint:eslint:fix": "eslint --ignore-path ./.gitignore --fix --ext .ts,.js .",
-    "lint:fix": "yarn run lint:eslint:fix && yarn run lint:markdown:fix && yarn run lint:prettier:fix",
-    "lint:markdown": "markdownlint --ignore-path ./.gitignore \"./**/*.md\"",
-    "lint:markdown:fix": "markdownlint --ignore-path ./.gitignore --fix \"./**/*.md\"",
-    "lint:prettier": "prettier --ignore-path ./.gitignore --check \"./**/*.{ts,js,json,yaml,yml,md}\"",
-    "lint:prettier:fix": "prettier --ignore-path ./.gitignore --write \"./**/*.{ts,js,json,yaml,yml,md}\"",
-    "start:dev": "yarn workspaces run start:dev",
-    "docker:up": "docker compose -p my-views-stack -f docker/docker-compose.yml up -d",
-    "docker:down": "docker compose -p my-views-stack -f docker/docker-compose.yml down -d",
-    "migrate:up": "yarn workspaces run migrate:up",
-    "migrate:down": "yarn workspaces run migrate:down",
-    "test:unit": "yarn workspaces run test:unit",
-    "test:cov": "yarn packages/app run test:cov"
+  "jest": {
+    "preset": "ts-jest",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    
+    "transformIgnorePatterns": [
+      "node_modules/(?!@nestjs|typeorm)"
+    ],
+    "collectCoverageFrom": [
+      "./src/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      ".dto.ts",
+      ".enum.ts",
+      ".module.ts"
+    ],
+    "coverageReporters": [
+      "text",
+      "@byndyusoft/sonar-coverage-reporter"
+    ],
+    "coverageDirectory": "./test/unit/coverage",
+    "clearMocks": true,
+    "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
