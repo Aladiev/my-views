@@ -8,9 +8,9 @@ export class CreateFilmRequestDtoBuilder {
     return new BaseBuilder<CreateFilmRequestDto>(new CreateFilmRequestDto()).with({
       title: faker.book.title(),
       year: faker.number.int({ min: 1900, max: 2100 }),
-      duration,
-      description,
-      imageId,
+      duration: faker.number.int({ min: 6000, max: 12000 }),
+      description: faker.lorem.lines(3),
+      imageId: faker.number.int(),
     });
   }
 }

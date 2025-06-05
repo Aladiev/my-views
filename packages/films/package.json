@@ -24,8 +24,7 @@
     "migrate:generate": "npm run typeorm:cli -- migration:generate -n ",
     "migrate:up": "yarn build:migration && yarn typeorm:cli_build -- migration:run -t each && rd /s /q dist_migrations",
     "migrate:down": "yarn build:migration && yarn typeorm:cli_build -- migration:revert -t each && rd /s /q dist_migrations",
-    "test": "jest --no-cache",
-    "test:cov": "jest --coverage",
+    "test:unit": "jest --no-cache --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "jest": {
@@ -34,15 +33,24 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "./src/**"
     ],
-    "coverageDirectory": "../coverage",
+    "coveragePathIgnorePatterns": [
+      ".dto.ts",
+      ".enum.ts",
+      ".module.ts"
+    ],
+    "coverageReporters": [
+      "text",
+      "@byndyusoft/sonar-coverage-reporter"
+    ],
+    "coverageDirectory": "./test/unit/coverage",
+    "clearMocks": true,
     "testEnvironment": "node"
   },
   "engines": {

@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "c62270a3-03cc-4517-92c4-bbf43f20bb20",
+		"name": "My-views",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6443217"
+	},
+	"item": [
+		{
+			"name": "Generate films",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/60227361/Desktop/600x900.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}/films/images/upload",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"films",
+						"images",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}

@@ -1,8 +1,8 @@
 import { TestBed, Mocked } from '@suites/unit';
 
-import { LoginRequestDtoBuilder } from '@/test/unit/builders/dto/authorization/loginRequestDto.builder';
 import { FilmsController } from '../../../../src/application/films/controllers/films.controller';
 import { FilmsService } from '../../../../src/application/films/services/films.service';
+import { CreateFilmRequestDtoBuilder, SearchFilmsRequestDtoBuilder } from '../../builders';
 
 describe(`${FilmsController.name}`, () => {
   let controller: FilmsController;
@@ -17,8 +17,18 @@ describe(`${FilmsController.name}`, () => {
   });
 
   test(`${FilmsController.prototype.createFilm.name}`, async () => {
-    await controller.createFilm(LoginRequestDtoBuilder.defaultAll.result);
+    const dto = CreateFilmRequestDtoBuilder.defaultAll.result;
+    
+    await controller.createFilm(dto);
 
-    expect(stubService.login).toHaveBeenCalledTimes(1);
+    expect(stubService.createFilm).toHaveBeenCalledWith(dto);
+  });
+  
+  test(`${FilmsController.prototype.searchFilms.name}`, async () => {
+    const dto = SearchFilmsRequestDtoBuilder.defaultAll.result;
+    
+    await controller.searchFilms(dto);
+
+    expect(stubService.searchFilms).toHaveBeenCalledWith(dto);
   });
 });
