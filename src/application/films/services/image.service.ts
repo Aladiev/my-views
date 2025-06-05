@@ -12,7 +12,6 @@ export class ImageService {
 
   async createImage(file: Express.Multer.File): Promise<FilmImage> {
     const image = new FilmImage();
-    console.log(file);
 
     image.name = file.originalname;
     image.data = file.buffer;
