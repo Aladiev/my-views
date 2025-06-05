@@ -69,7 +69,6 @@ export class FilmsController {
       return res.status(404).send('Image not found');
     }
 
-    res.setHeader('Content-Type', image.mimetype);
-    res.send(image.data);
+    return res.setHeader('Content-Type', image.mimetype).send(image.data);
   }
 }
