@@ -5,10 +5,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const initSwagger = (app: INestApplication): void => {
   const options = new DocumentBuilder()
-    .setTitle('crypton')
-    .setDescription('Crypton project')
+    .setTitle('Authorization')
+    .setDescription('Authorization service')
     .addBearerAuth()
-    .addSecurityRequirements('bearer');;
+    .addSecurityRequirements('bearer');
 
   const document = SwaggerModule.createDocument(app, options.build());
   SwaggerModule.setup('api', app, document);
