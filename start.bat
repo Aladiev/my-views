@@ -1,0 +1,1 @@
+docker compose -p my-views-stack -f docker/docker-compose.yml up -d
