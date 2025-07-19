@@ -8,7 +8,7 @@ export class UserBuilder {
       email: 'test email',
       password: 'test password',
     };
-    
+
     const UserModel = mongoose.model(User.name, UsersSchema);
     const user = new UserModel(dto) as User & { _id: User['_id'] };
 

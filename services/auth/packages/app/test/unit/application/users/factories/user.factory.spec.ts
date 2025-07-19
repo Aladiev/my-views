@@ -28,7 +28,7 @@ describe(`${UserFactory.name}`, () => {
       const dto = CreateUserDtoBuilder.defaultAll.result;
 
       await factory.create(dto);
-      
+
       expect(mockModel).toHaveBeenCalledTimes(1);
     });
   });

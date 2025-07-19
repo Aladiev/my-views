@@ -5,6 +5,8 @@ import { expirationTimeInSecondsEnv, secretEnv } from '../../shared/config/const
 export const getJWTConfig = async (configService: ConfigService): Promise<JwtModuleOptions> => {
   return {
     secret: configService.get(secretEnv),
-    signOptions: { expiresIn: `${configService.get(expirationTimeInSecondsEnv)}s` },
+    signOptions: {
+      expiresIn: `${configService.get(expirationTimeInSecondsEnv)}s`,
+    },
   };
 };

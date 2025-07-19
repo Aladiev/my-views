@@ -16,7 +16,10 @@ export class User extends Document {
   @Prop({ type: String, required: true, unique: true })
   email: string;
 
-  @ApiProperty({ example: 'User password', description: 'Password of the user ' })
+  @ApiProperty({
+    example: 'User password',
+    description: 'Password of the user ',
+  })
   @Prop({ type: String, required: true, index: 'text' })
   password: string;
 }

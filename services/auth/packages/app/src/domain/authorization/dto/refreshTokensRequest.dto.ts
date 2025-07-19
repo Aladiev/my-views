@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class RefreshTokensRequestDto {
   @ApiProperty({ example: 'saldasldsald' })
@@ -7,4 +7,4 @@ export class RefreshTokensRequestDto {
   email: string;
 
   expRef: number;
-};
+}

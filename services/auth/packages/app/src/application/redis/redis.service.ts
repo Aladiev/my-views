@@ -1,8 +1,8 @@
-import { Inject, Injectable } from "@nestjs/common";
-import RedisClient from "ioredis";
-import { SOME_STRING } from "../../shared/constants";
-import { ConfigService } from "@nestjs/config";
-import { expirationTimeInSecondsEnv } from "../../shared/config/constants";
+import { Inject, Injectable } from '@nestjs/common';
+import RedisClient from 'ioredis';
+import { SOME_STRING } from '../../shared/constants';
+import { ConfigService } from '@nestjs/config';
+import { expirationTimeInSecondsEnv } from '../../shared/config/constants';
 
 @Injectable()
 export class RedisService {

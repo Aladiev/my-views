@@ -12,7 +12,7 @@ import { RedisService } from './redis.service';
           host: process.env.REDIS_HOST ?? '127.0.0.1',
           port: process.env.REDIS_PORT ? Number(process.env.REDIS_PORT) : 6379,
         });
-        client.on('error', (err) => console.error('Redis Client Error', err));
+        client.on('error', err => console.error('Redis Client Error', err));
         if (!client.status) {
           await client.connect();
         }
@@ -23,4 +23,4 @@ import { RedisService } from './redis.service';
   ],
   exports: [RedisClient, RedisService],
 })
-export class RedisModule { }
+export class RedisModule {}

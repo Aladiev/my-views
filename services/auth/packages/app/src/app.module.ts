@@ -12,8 +12,7 @@ const mongoPort = process.env.MONGO_PORT ?? '27017';
     InfrastructureModule,
     UsersModule,
     AuthorizationModule,
-    MongooseModule.forRoot(`mongodb://${mongoHost}:${mongoPort}`, {
-    }),
+    MongooseModule.forRoot(`mongodb://${mongoHost}:${mongoPort}`, {}),
     RedisModule,
   ],
   controllers: [],

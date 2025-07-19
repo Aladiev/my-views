@@ -7,17 +7,9 @@ import { UsersRepository } from './repositories/user.repository';
 import { UserFactory } from './factories/users.factory';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: User.name, schema: UsersSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UsersSchema }])],
   controllers: [UsersController],
-  providers: [
-    UsersService,
-    UsersRepository,
-    UserFactory,
-  ],
-  exports: [UsersService]
+  providers: [UsersService, UsersRepository, UserFactory],
+  exports: [UsersService],
 })
 export class UsersModule {}

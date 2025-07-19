@@ -3,11 +3,10 @@ import { RefreshTokensRequestDto } from '../../../../src/domain/authorization/dt
 
 export class RefreshTokensRequestDtoBuilder {
   public static get defaultAll(): InjectionFixtureBuilder<RefreshTokensRequestDto> {
-    return new InjectionFixtureBuilder(new RefreshTokensRequestDto())
-      .with({
-        refreshToken: 'test token',
-        email: 'test email',
-        expRef: Date.now(),
-      });
+    return new InjectionFixtureBuilder(new RefreshTokensRequestDto()).with({
+      refreshToken: 'test token',
+      email: 'test email',
+      expRef: Date.now(),
+    });
   }
 }

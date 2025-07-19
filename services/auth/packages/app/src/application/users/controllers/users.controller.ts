@@ -10,7 +10,7 @@ import { JwtAuthGuard } from '../../authorization/guards/jwt.guard';
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
-  constructor (public readonly usersService: UsersService) {}
+  constructor(public readonly usersService: UsersService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create User' })
@@ -19,9 +19,7 @@ export class UsersController {
     description: 'Create User',
     type: User,
   })
-  public async createUser(
-    @Body() dto: CreateUserDto,
-  ): Promise<User> {
+  public async createUser(@Body() dto: CreateUserDto): Promise<User> {
     return this.usersService.create(dto);
   }
 

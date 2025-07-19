@@ -24,9 +24,9 @@ describe(`${UsersService.name}`, () => {
     test(`should call repository method`, async () => {
       const dto = CreateUserDtoBuilder.defaultAll.result;
       const user = UserBuilder.defaultAll.result;
-  
+
       mockUserFactory.create = jest.fn().mockResolvedValue(user);
-  
+
       await service.create(dto);
 
       expect(mockUsersRepository.save).toHaveBeenCalledWith(user);
@@ -36,10 +36,13 @@ describe(`${UsersService.name}`, () => {
   describe(`${UsersService.prototype.findOneByEmailAndPassword.name}`, () => {
     test(`should call repository method`, async () => {
       const user = UserBuilder.defaultAll.result;
-  
+
       await service.findOneByEmailAndPassword(user.email, user.password);
 
-      expect(mockUsersRepository.findOneByEmailAndPassword).toHaveBeenCalledWith(user.email, user.password);
+      expect(mockUsersRepository.findOneByEmailAndPassword).toHaveBeenCalledWith(
+        user.email,
+        user.password,
+      );
     });
   });
 });

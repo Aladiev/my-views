@@ -21,8 +21,6 @@ describe(`${UsersController.name}`, () => {
 
     await controller.createUser(dto);
 
-    expect(
-      mockUsersService.create,
-    ).toHaveBeenCalledWith(dto);
+    expect(mockUsersService.create).toHaveBeenCalledWith(dto);
   });
 });

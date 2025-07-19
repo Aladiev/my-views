@@ -16,7 +16,6 @@
     "migrate:down": "migrate-mongo down -f ./migrations/config/config.js",
     "migrate:create": "migrate-mongo create",
     "test:unit": "jest --no-cache --coverage"
-    
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

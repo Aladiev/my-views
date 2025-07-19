@@ -7,7 +7,7 @@ import config from '../shared/config/plainConfig';
   imports: [
     ConfigModule.forRoot({
       load: [config],
-    })
+    }),
   ],
   exports: [ConfigModule],
 })

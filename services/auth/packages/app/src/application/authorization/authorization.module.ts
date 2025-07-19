@@ -19,6 +19,6 @@ import { getJWTConfig } from './getJWTConfig';
     PassportModule,
   ],
   controllers: [AuthorizationController],
-  providers: [AuthorizationService, JwtStrategy]
+  providers: [AuthorizationService, JwtStrategy],
 })
 export class AuthorizationModule {}

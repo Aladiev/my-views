@@ -6,7 +6,7 @@ import { RefreshTokensRequestDtoBuilder } from '../../../../__fixtures__/builder
 
 describe(`${AuthorizationController.name}`, () => {
   let controller: AuthorizationController;
-  
+
   let mockAuthorizationService: jest.Mocked<AuthorizationService>;
 
   beforeAll(() => {
@@ -22,9 +22,7 @@ describe(`${AuthorizationController.name}`, () => {
 
     await controller.login(dto);
 
-    expect(
-      mockAuthorizationService.login,
-    ).toHaveBeenCalledWith(dto);
+    expect(mockAuthorizationService.login).toHaveBeenCalledWith(dto);
   });
 
   test(`${AuthorizationController.prototype.refresh.name}`, async () => {
@@ -32,8 +30,6 @@ describe(`${AuthorizationController.name}`, () => {
 
     await controller.refresh(dto);
 
-    expect(
-      mockAuthorizationService.refresh,
-    ).toHaveBeenCalledWith(dto);
+    expect(mockAuthorizationService.refresh).toHaveBeenCalledWith(dto);
   });
 });

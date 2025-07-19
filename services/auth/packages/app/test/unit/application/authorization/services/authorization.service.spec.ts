@@ -30,9 +30,9 @@ describe(`${AuthorizationService.name}`, () => {
     test(`user not found -> should throw error`, async () => {
       const dto = LoginRequestDtoBuilder.defaultAll.result;
       const user = null;
-  
+
       mockUsersService.findOneByEmailAndPassword = jest.fn().mockResolvedValue(user);
-  
+
       await expect(() => service.login(dto)).rejects.toThrow(USER_NOT_FOUND);
     });
 
@@ -40,7 +40,7 @@ describe(`${AuthorizationService.name}`, () => {
       const dto = LoginRequestDtoBuilder.defaultAll.result;
       const user = UserBuilder.defaultAll.result;
       const result = LoginResponseDtoBuilder.defaultAll.result;
-  
+
       mockUsersService.findOneByEmailAndPassword = jest.fn().mockResolvedValue(user);
       mockJwtService.sign.mockImplementation(() => {
         const mockReturnValues = [result.accessToken, result.refreshToken];
@@ -75,9 +75,7 @@ describe(`${AuthorizationService.name}`, () => {
 
       await service.refresh(dto);
 
-      expect(mockRedisService.saveRefreshToken).toHaveBeenCalledWith(
-        dto.refreshToken,
-      );
+      expect(mockRedisService.saveRefreshToken).toHaveBeenCalledWith(dto.refreshToken);
     });
   });
 });

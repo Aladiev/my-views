@@ -12,9 +12,12 @@ export class UsersRepository {
   }
 
   public findOneByEmailAndPassword(email: string, password: string): Promise<User | null> {
-    return this.model.findOne({
-      email, password
-    }).exec()
+    return this.model
+      .findOne({
+        email,
+        password,
+      })
+      .exec();
   }
 
   public async clearTable(): Promise<void> {

@@ -3,10 +3,9 @@ import { LoginRequestDto } from '../../../../src/domain/authorization/dto/loginR
 
 export class LoginRequestDtoBuilder {
   public static get defaultAll(): InjectionFixtureBuilder<LoginRequestDto> {
-    return new InjectionFixtureBuilder(new LoginRequestDto())
-      .with({
-        email: 'test email',
-        password: 'test password'
-      });
+    return new InjectionFixtureBuilder(new LoginRequestDto()).with({
+      email: 'test email',
+      password: 'test password',
+    });
   }
 }

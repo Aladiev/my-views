@@ -16,7 +16,7 @@ describe(`${UsersRepository.name}`, () => {
     const { unit, unitRef } = TestBed.create(UsersRepository)
       .mock(getModelToken(User.name))
       .using({
-        findOne: jest.fn().mockReturnValue({ exec: jest.fn()}),
+        findOne: jest.fn().mockReturnValue({ exec: jest.fn() }),
       })
       .compile();
 
@@ -30,18 +30,17 @@ describe(`${UsersRepository.name}`, () => {
       const user = UserBuilder.defaultAll.result;
 
       user.save = jest.fn();
-  
+
       await repository.save(user);
-      
+
       expect(user.save).toHaveBeenCalledTimes(1);
     });
   });
 
-
   describe(`${UsersRepository.prototype.findOneByEmailAndPassword.name}`, () => {
     test(`should call repository method`, async () => {
       const user = UserBuilder.defaultAll.result;
-  
+
       await repository.findOneByEmailAndPassword(user.email, user.password);
 
       expect(mockModel.findOne).toHaveBeenCalledWith({

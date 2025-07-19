@@ -10,9 +10,7 @@ import { CreateUserDto } from '../../../shared/dto/users/CreateUser.dto';
 @ApiTags('Authorization')
 @Controller('authorization')
 export class AuthorizationController {
-  constructor(
-    private readonly service: AuthorizationService
-  ) {}
+  constructor(private readonly service: AuthorizationService) {}
 
   @Post('register')
   @ApiOperation({ summary: 'Register' })
@@ -21,9 +19,7 @@ export class AuthorizationController {
     description: 'Register to app',
     type: LoginResponseDto,
   })
-  public async register(
-    @Body() dto: CreateUserDto,
-  ): Promise<LoginResponseDto> {
+  public async register(@Body() dto: CreateUserDto): Promise<LoginResponseDto> {
     return this.service.register(dto);
   }
 
@@ -34,23 +30,23 @@ export class AuthorizationController {
     description: 'Login to app',
     type: LoginResponseDto,
   })
-  public async login(
-    @Body() dto: LoginRequestDto,
-  ): Promise<LoginResponseDto> {
+  public async login(@Body() dto: LoginRequestDto): Promise<LoginResponseDto> {
     return this.service.login(dto);
   }
 
   @Post('refresh')
   @ApiOperation({ summary: 'Refresh tokens' })
   @ApiBody({
-    type: RefreshTokensRequestDto
+    type: RefreshTokensRequestDto,
   })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Login to app',
     type: LoginResponseDto,
   })
-  public refresh(@Body('refreshToken', RefreshToken) dto: RefreshTokensRequestDto): Promise<LoginResponseDto> {
+  public refresh(
+    @Body('refreshToken', RefreshToken) dto: RefreshTokensRequestDto,
+  ): Promise<LoginResponseDto> {
     return this.service.refresh(dto);
   }
 }
