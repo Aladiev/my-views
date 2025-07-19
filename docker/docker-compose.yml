@@ -17,15 +17,15 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
 
-  # films-service:
-  #   image: aladiev/films
-  #   restart: always
-  #   ports:
-  #     - 3101:3000
-  #   environment:
-  #     - PG_CONNECTION_STRING=postgresql://postgres:postgres@db:5432/postgres
-  #   depends_on:
-  #     - db
+  films-service:
+    image: aladiev/films
+    restart: always
+    ports:
+      - 3101:3000
+    environment:
+      - PG_CONNECTION_STRING=postgresql://postgres:postgres@films-db:5432/postgres
+    depends_on:
+      - films-db
 
   auth-db:
     image: mongo
@@ -40,14 +40,19 @@ services:
   #   depends_on:
   #     - users-db
 
-  # auth-service:
-  #   image: aladiev/auth
-  #   restart: always
-  #   ports:
-  #     - 3102:3000
-  #   depends_on:
-  #     - auth-db
-  #     - redis
+  auth-service:
+    image: aladiev/auth
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_HOST=auth-db
+      - MONGO_PORT=27017
+    ports:
+      - 3102:3000
+    depends_on:
+      - auth-db
+      - redis
 
   redis:
     image: redis:alpine
