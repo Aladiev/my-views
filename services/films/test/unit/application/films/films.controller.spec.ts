@@ -18,17 +18,23 @@ describe(`${FilmsController.name}`, () => {
 
   test(`${FilmsController.prototype.createFilm.name}`, async () => {
     const dto = CreateFilmRequestDtoBuilder.defaultAll.result;
-    
+
     await controller.createFilm(dto);
 
     expect(stubService.createFilm).toHaveBeenCalledWith(dto);
   });
-  
+
   test(`${FilmsController.prototype.searchFilms.name}`, async () => {
     const dto = SearchFilmsRequestDtoBuilder.defaultAll.result;
-    
+
     await controller.searchFilms(dto);
 
     expect(stubService.searchFilms).toHaveBeenCalledWith(dto);
+  });
+
+  test(`${FilmsController.prototype.getRecommendations.name}`, async () => {
+    await controller.getRecommendations();
+
+    expect(stubService.getRecommendations).toHaveBeenCalled();
   });
 });

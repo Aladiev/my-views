@@ -18,6 +18,7 @@ import { ApiResponse200 } from '../../../shared/decorators/responses/apiResponse
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from '../services/image.service';
 import { Response } from 'express';
+import { GetRecommendationsResponseDto } from '../dtos/getRecommendations/getRecommendationsResponse.dto';
 
 @Controller('films')
 @ApiTags('Films')
@@ -37,6 +38,12 @@ export class FilmsController {
   @ApiResponse200(SearchFilmsResponseDto)
   public searchFilms(@Body() dto: SearchFilmsRequestDto): Promise<SearchFilmsResponseDto> {
     return this.filmsService.searchFilms(dto);
+  }
+
+  @Get('recommendations')
+  @ApiResponse200(GetRecommendationsResponseDto)
+  public getRecommendations(): Promise<GetRecommendationsResponseDto> {
+    return this.filmsService.getRecommendations();
   }
 
   @Post('images/upload')

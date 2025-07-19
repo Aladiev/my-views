@@ -1,13 +1,12 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { Film } from '../../../../domain/films/film.entity';
 
-export class SearchFilmsItemDto extends PickType(Film, ['title', 'year', 'duration', 'imageId']) {
+export class SearchFilmsItemDto extends PickType(Film, ['id', 'title', 'imageId']) {
   public static from(film: Film): SearchFilmsItemDto {
     const dto = new SearchFilmsItemDto();
 
+    dto.id = film.id;
     dto.title = film.title;
-    dto.year = film.year;
-    dto.duration = film.duration;
     dto.imageId = film.imageId;
 
     return dto;
@@ -15,7 +14,7 @@ export class SearchFilmsItemDto extends PickType(Film, ['title', 'year', 'durati
 }
 
 export class SearchFilmsResponseDto {
-  @ApiProperty({ example: [{ title: 'Начало', year: 2008, duration: 8880 }] })
+  @ApiProperty({ example: [{ id: 1, title: 'Начало', imageId: 1 }] })
   items: SearchFilmsItemDto[];
 
   public static from(films: Film[]): SearchFilmsResponseDto {

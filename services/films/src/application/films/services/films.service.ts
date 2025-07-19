@@ -5,6 +5,7 @@ import { CreateFilmRequestDto } from '../dtos/createFilm/createFilmRequest.dto';
 import { FilmsRepository } from '../repositories/films.repository';
 import { SearchFilmsRequestDto } from '../dtos/searchFilms/searchFilmsRequest.dto';
 import { SearchFilmsResponseDto } from '../dtos/searchFilms/searchFilmsResponse.dto';
+import { GetRecommendationsResponseDto } from '../dtos/getRecommendations/getRecommendationsResponse.dto';
 
 @Injectable()
 export class FilmsService {
@@ -20,5 +21,11 @@ export class FilmsService {
     const result = await this.repository.findByTitlePattern(dto.title);
 
     return SearchFilmsResponseDto.from(result);
+  }
+
+  public async getRecommendations(): Promise<GetRecommendationsResponseDto> {
+    const result = await this.repository.findRecommendations();
+
+    return GetRecommendationsResponseDto.from(result);
   }
 }

@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "build": "nest build",
-    "deploy": "yarn docker:build && yarn docker:push",
     "build:migration": "npx tsc --project tsconfig.build-migrations.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "docker:build": "docker build . -t aladiev/films",
+    "docker:build-and-push": "yarn docker:build && yarn docker:push",
     "docker:push": "docker push aladiev/films",
     "lint": "yarn run lint:eslint && yarn run lint:prettier",
     "lint:prettier": "prettier --config ./lint/.prettierrc --ignore-path ./lint/.lintignore --check \"./**/*.{ts,js,json,yaml,yml,md}\"",
@@ -81,7 +81,6 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    
     "transformIgnorePatterns": [
       "node_modules/(?!@nestjs|typeorm)"
     ],

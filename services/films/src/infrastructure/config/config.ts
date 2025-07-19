@@ -4,7 +4,7 @@ dotenv.config({ path: '.env' });
 
 export function requiredEnv(env: string): string {
   if (process.env[env] === undefined) throw Error(`Required environment ${env} is not provided`);
-  
+
   return process.env[env];
 }
 

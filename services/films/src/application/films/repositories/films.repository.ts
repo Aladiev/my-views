@@ -22,4 +22,13 @@ export class FilmsRepository {
       .where({ title: Like(`%${pattern}%`) })
       .getMany();
   }
+
+  public findRecommendations(limit: number = 10): Promise<Film[]> {
+    return this.dataSource
+      .createQueryBuilder(Film, 'film')
+      .select()
+      .orderBy('RANDOM()')
+      .limit(limit)
+      .getMany();
+  }
 }
