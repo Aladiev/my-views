@@ -28,6 +28,12 @@ export class FilmsController {
     private imageService: ImageService,
   ) {}
 
+  @Get(':id')
+  @ApiOperation({ summary: 'Create film' })
+  public getFilmById(@Param('id') id: number): Promise<Film> {
+    return this.filmsService.getFilmById(id);
+  }
+
   @Post()
   @ApiOperation({ summary: 'Create film' })
   public createFilm(@Body() dto: CreateFilmRequestDto): Promise<Film> {
