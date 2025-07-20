@@ -23,7 +23,7 @@ async function bootstrap() {
     }),
   );
 
-  app.enableCors();
+  app.enableCors({ credentials: true });
 
   initSwagger(app);
 
