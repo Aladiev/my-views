@@ -1,0 +1,72 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "build:migration": "npx tsc --project tsconfig.build-migrations.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "docker:build": "docker build . -t aladiev/films",
+    "docker:build-and-push": "yarn docker:build && yarn docker:push",
+    "docker:push": "docker push aladiev/films",
+    "typeorm:cli": "typeorm -d migrations/config/config",
+    "typeorm:cli_build": "yarn build:migration && typeorm -d dist_migrations/config/config",
+    "migrate:create": "typeorm migration:create",
+    "migrate:generate": "npm run typeorm:cli -- migration:generate -n ",
+    "migrate:up": "yarn build:migration && yarn typeorm:cli_build -- migration:run -t each && rd /s /q dist_migrations",
+    "migrate:down": "yarn build:migration && yarn typeorm:cli_build -- migration:revert -t each && rd /s /q dist_migrations",
+    "test:unit": "jest --no-cache --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "typeorm": "0.3.17",
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^11.1.0",
+    "@nestjs/swagger": "^11.1.5",
+    "@nestjs/typeorm": "10.0.1",
+    "@types/multer": "^1.4.12",
+    "class-validator": "^0.14.1",
+    "multer": "^1.4.5-lts.2",
+    "pg": "^8.15.6",
+    "reflect-metadata": "^0.2.0",
+    "rxjs": "^7.8.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@nestjs|typeorm)"
+    ],
+    "collectCoverageFrom": [
+      "./src/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      ".dto.ts",
+      ".enum.ts",
+      ".module.ts"
+    ],
+    "coverageReporters": [
+      "text",
+      "@byndyusoft/sonar-coverage-reporter"
+    ],
+    "coverageDirectory": "./test/unit/coverage",
+    "clearMocks": true,
+    "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
