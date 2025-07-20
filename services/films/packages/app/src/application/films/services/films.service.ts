@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Film } from '../../../domain/films/film.entity';
 import { CreateFilmRequestDto } from '../dtos/createFilm/createFilmRequest.dto';
@@ -10,6 +10,14 @@ import { GetRecommendationsResponseDto } from '../dtos/getRecommendations/getRec
 @Injectable()
 export class FilmsService {
   constructor(private readonly repository: FilmsRepository) {}
+
+  public async getFilmById(id: Film['id']): Promise<Film> {
+    const film = await this.repository.findById(id);
+    
+    if (!film) throw new NotFoundException('Not found film.');
+
+    return film;
+  }
 
   public createFilm(dto: CreateFilmRequestDto): Promise<Film | null> {
     const film = Film.create(dto);

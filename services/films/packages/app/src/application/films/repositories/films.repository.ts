@@ -15,6 +15,14 @@ export class FilmsRepository {
     return this.repository.save(film);
   }
 
+  public findById(id: Film['id']): Promise<Film | null> {
+    return this.dataSource
+      .createQueryBuilder(Film, 'film')
+      .select()
+      .where({ id })
+      .getOne();
+  }
+  
   public findByTitlePattern(pattern: string): Promise<Film[]> {
     return this.dataSource
       .createQueryBuilder(Film, 'film')
